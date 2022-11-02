@@ -1,4 +1,4 @@
-FROM centos
+FROM docker.io/couchbase/centos7-systemd
 MAINTAINER Marcel marcel.lans@conclusionxforce.nl
 
 # Add repo file
