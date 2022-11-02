@@ -1,4 +1,4 @@
-FROM ubi8
+FROM centos
 MAINTAINER Marcel marcel.lans@conclusionxforce.nl
 
 # Add repo file
