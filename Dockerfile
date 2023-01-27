@@ -1,14 +1,13 @@
-FROM docker.io/couchbase/centos7-systemd
-MAINTAINER Marcel marcel.lans@conclusionxforce.nl
+FROM registry.redhat.io/openshift-logging/fluentd-rhel8:v1.7.4-70
+RUN BUILD_PKGS="make gcc-c++ libffi-devel \
+                autoconf automake libtool m4 \
+                redhat-rpm-config" && \
+    yum install -y $BUILD_PKGS
 
-# Add repo file
+ADD Gemfile Gemfile.lock ./
+RUN bundle install
 
-# Install cool software
-RUN yum --assumeyes update && \
-yum --assumeyes install \
-nmap iproute && \
-bash && \
-yum clean all
-
-ENTRYPOINT ["/usr/bin/nmap"]
-CMD ["-sn", "192.168.122.0/24"] 
+RUN BUILD_PKGS="make gcc-c++ libffi-devel \
+                autoconf automake libtool m4 \
+                redhat-rpm-config" && \
+    yum remove -y $BUILD_PKGS && yum clean all
